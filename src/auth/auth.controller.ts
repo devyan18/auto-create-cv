@@ -65,13 +65,7 @@ export class AuthController {
 
   @Post('oauth')
   async oauth(@Body() oauth: GetTokensWithOAuthAccountDto) {
-    console.log('oauth controller');
-
-    console.log(oauth);
-
     const data = await this.authService.oauth(oauth);
-
-    console.log('data', data);
     return data;
   }
 }

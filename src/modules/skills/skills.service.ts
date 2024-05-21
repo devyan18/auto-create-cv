@@ -64,6 +64,9 @@ export class SkillsService {
   }
 
   async update(id: string, updateSkillDto: UpdateSkillDto, creatorId: string) {
+
+    await this.findOne(id, creatorId)
+
     return this.skillModel.findOneAndUpdate(
       { skillId: id, creator: creatorId },
       updateSkillDto,

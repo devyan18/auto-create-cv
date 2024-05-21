@@ -26,7 +26,6 @@ export class AuthService {
   ) {}
 
   async generateAccessToken(payload: { id: string }) {
-    console.log(payload);
     return await this.jwtService.signAsync(payload, {
       secret: this.configService.get<string>('JWT_SECRET'),
     });
@@ -50,7 +49,6 @@ export class AuthService {
 
   async signIn({ email, password }: LoginAuthDto): Promise<SignInResponse> {
     const user = await this.getUserByEmailAndPassword(email, password);
-    console.log(user);
     const payload = { id: user.userId };
 
     const access_token = await this.generateAccessToken(payload);
@@ -76,11 +74,9 @@ export class AuthService {
 
   async getMe({ email, password }: { email: string; password: string }) {
     const user = await this.getUserByEmailAndPassword(email, password);
-    console.log(user);
     const payload = { id: user.userId };
 
     const access_token = await this.generateAccessToken(payload);
-    console.log(access_token);
     return { user, access_token };
   }
 
